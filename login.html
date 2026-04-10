@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login | Reach the Nations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="login-page">
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="logo">Reach the Nations</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="login-main">
+    <div class="login-card">
+      <h1 class="login-title">Admin login</h1>
+      <p class="login-desc">Sign in to access the ministry dashboard.</p>
+      <form id="login-form" class="login-form" action="#" method="post">
+        <div class="form-row">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required placeholder="your@email.com" autocomplete="email">
+        </div>
+        <div class="form-row">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required placeholder="••••••••" autocomplete="current-password">
+        </div>
+        <p id="login-error" class="login-error" role="alert" aria-live="polite" hidden>Incorrect password. Please try again.</p>
+        <button type="submit" class="btn btn-primary btn-block">Log in</button>
+      </form>
+      <p class="login-back"><a href="index.html">← Back to site</a></p>
+    </div>
+  </main>
+
+  <script src="auth.js"></script>
+  <script>
+    (function () {
+      if (window.auth && window.auth.isAuthenticated()) {
+        window.location.replace('admin.html');
+        return;
+      }
+      var form = document.getElementById('login-form');
+      var errorEl = document.getElementById('login-error');
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var password = document.getElementById('password').value;
+        if (window.auth.login(password)) {
+          window.location.href = 'admin.html';
+        } else {
+          errorEl.hidden = false;
+          errorEl.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

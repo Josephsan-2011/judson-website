@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Podcasts | Reach the Nations — Thailand</title>
+  <meta name="description" content="Listen to stories from Thailand—ministry updates, culture, and what God is doing among the Thai people.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="logo">Reach the Nations</a>
+      <ul class="nav-links">
+        <li><a href="index.html#mission">Mission</a></li>
+        <li><a href="index.html#impact">Impact</a></li>
+        <li><a href="index.html#support">Support</a></li>
+        <li><a href="podcasts.html" class="nav-current">Podcasts</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero hero-page">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-content">
+        <p class="hero-tagline">Listen</p>
+        <h1 class="hero-title">Podcasts</h1>
+        <p class="hero-desc">Stories from Thailand—ministry updates, life and culture, and what God is doing among the Thai people. Subscribe and listen wherever you get your podcasts.</p>
+      </div>
+    </section>
+
+    <section class="section podcast-subscribe">
+      <div class="container">
+        <span class="section-label">Subscribe</span>
+        <h2 class="section-title">Where to listen</h2>
+        <p class="section-intro">Follow us on your favorite platform to get new episodes automatically.</p>
+        <ul class="subscribe-links">
+          <li><a href="#" class="btn btn-primary">Apple Podcasts</a></li>
+          <li><a href="#" class="btn btn-secondary">Spotify</a></li>
+          <li><a href="#" class="btn btn-secondary">Google Podcasts</a></li>
+          <li><a href="#" class="btn btn-secondary">RSS Feed</a></li>
+        </ul>
+        <p class="podcast-youtube">
+          <a href="https://www.youtube.com/channel/UC9riU5KBNWVoq8Ac50pOytw" class="link-arrow" target="_blank" rel="noopener noreferrer">YouTube channel</a>
+        </p>
+      </div>
+    </section>
+
+    <section class="section podcast-list-section">
+      <div class="container">
+        <span class="section-label">Episodes</span>
+        <h2 class="section-title">Latest episodes</h2>
+        <ul class="podcast-list" id="podcast-list">
+        </ul>
+        <p class="podcast-empty" id="podcast-empty">No episodes yet. Check back soon—or subscribe above to be notified when we launch.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <a href="index.html" class="logo">Reach the Nations</a>
+        <p class="footer-tagline">Serving. Going. Sending.</p>
+        <ul class="footer-links">
+          <li><a href="index.html#mission">Mission</a></li>
+          <li><a href="index.html#impact">Impact</a></li>
+          <li><a href="index.html#support">Support</a></li>
+          <li><a href="podcasts.html">Podcasts</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <p class="footer-copy">&copy; 2025 Reach the Nations. All rights reserved. <a href="login.html" class="footer-admin">Admin</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="podcasts-data.js"></script>
+  <script>
+    (function () {
+      if (!window.Podcasts) return;
+
+      var listEl = document.getElementById('podcast-list');
+      var emptyEl = document.getElementById('podcast-empty');
+
+      function formatDate(iso) {
+        if (!iso) return '';
+        var d = new Date(iso);
+        return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+      }
+
+      function escapeHtml(s) {
+        if (!s) return '';
+        var div = document.createElement('div');
+        div.textContent = s;
+        return div.innerHTML;
+      }
+
+      function escapeAttr(s) {
+        return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+      }
+
+      var list = window.Podcasts.get();
+      if (list.length === 0) {
+        if (emptyEl) emptyEl.hidden = false;
+        return;
+      }
+
+      if (emptyEl) emptyEl.hidden = true;
+      list.forEach(function (p) {
+        var li = document.createElement('li');
+        li.className = 'podcast-card';
+        var urlAttr = p.url ? ' data-url="' + escapeAttr(p.url) + '"' : '';
+        li.innerHTML =
+          '<button type="button" class="podcast-play" aria-label="Play episode"' + urlAttr + '>' +
+            '<span class="play-icon" aria-hidden="true"></span></button>' +
+          '<div class="podcast-card-body">' +
+            '<span class="podcast-date">' + escapeHtml(formatDate(p.date)) + '</span>' +
+            '<h3 class="podcast-title">' + escapeHtml(p.title) + '</h3>' +
+            '<p class="podcast-desc">' + escapeHtml(p.description) + '</p>' +
+            '<span class="podcast-duration">' + escapeHtml(p.duration) + '</span>' +
+          '</div>';
+        listEl.appendChild(li);
+      });
+
+      listEl.addEventListener('click', function (e) {
+        var btn = e.target.closest('.podcast-play');
+        if (!btn) return;
+        var url = btn.getAttribute('data-url');
+        if (url) window.open(url, '_blank');
+      });
+    })();
+  </script>
+</body>
+</html>
