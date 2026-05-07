@@ -103,6 +103,15 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.nav-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
 }
 
 .logo {
@@ -111,34 +120,171 @@ a:hover {
   font-size: 1.35rem;
   color: var(--color-ink);
   transition: color var(--nav-transition);
+  line-height: 1.2;
 }
 
 .logo:hover {
   color: var(--color-teal);
 }
 
-.nav-links {
+.logo-tagline {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--color-ink-soft);
+  max-width: 16rem;
+  line-height: 1.35;
+}
+
+.nav-primary {
+  flex: 1;
   display: flex;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+.nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.15rem 0.25rem;
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: var(--space-lg);
 }
 
-.nav-links a {
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  display: block;
+  padding: 0.5rem 0.65rem;
   font-weight: 500;
+  font-size: 0.9rem;
   color: var(--color-ink-soft);
-  font-size: 0.95rem;
-  transition: color var(--nav-transition);
+  border-radius: var(--radius);
+  transition: color var(--nav-transition), background var(--nav-transition);
 }
 
-.nav-links a:hover {
+.nav-link:hover {
   color: var(--color-teal);
 }
 
-.nav-links a.nav-current {
+.nav-link.nav-current {
   color: var(--color-teal);
   font-weight: 600;
+}
+
+.nav-dropdown-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.65rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-ink-soft);
+  background: none;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: color var(--nav-transition), background var(--nav-transition);
+}
+
+.nav-dropdown-trigger:hover {
+  color: var(--color-teal);
+}
+
+.nav-caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 0.1rem;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid currentColor;
+  opacity: 0.65;
+  transition: transform 0.2s var(--ease-out-smooth);
+}
+
+.nav-item--has-dropdown.nav-dropdown--open .nav-caret {
+  transform: rotate(180deg);
+}
+
+.nav-dropdown-menu {
+  list-style: none;
+  margin: 0;
+  padding: var(--space-xs) 0;
+  min-width: 15rem;
+  background: var(--color-white);
+  border: 1px solid var(--color-cream-dark);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition:
+    opacity 0.2s var(--ease-out-smooth),
+    visibility 0.2s,
+    transform 0.2s var(--ease-out-smooth);
+}
+
+.nav-dropdown-link {
+  display: block;
+  padding: 0.55rem var(--space-md);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--color-ink-soft);
+  border-radius: 0;
+}
+
+.nav-dropdown-link:hover {
+  color: var(--color-teal);
+  background: var(--color-cream);
+}
+
+.nav-dropdown-link.nav-current {
+  color: var(--color-teal);
+  font-weight: 600;
+}
+
+.updates-actions {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem 0.5rem;
+}
+
+.updates-actions-sep {
+  color: var(--color-ink-soft);
+  opacity: 0.6;
+}
+
+@media (min-width: 769px) {
+  .nav-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 120;
+  }
+
+  .nav-item--has-dropdown:hover .nav-dropdown-menu,
+  .nav-item--has-dropdown:focus-within .nav-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .nav-item--has-dropdown:hover .nav-dropdown-trigger,
+  .nav-item--has-dropdown:focus-within .nav-dropdown-trigger {
+    color: var(--color-teal);
+  }
 }
 
 .nav-toggle {
@@ -147,12 +293,13 @@ a:hover {
   justify-content: center;
   align-items: center;
   gap: 6px;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
+  flex-shrink: 0;
   transition: transform 0.2s var(--ease-out-smooth);
 }
 
@@ -187,70 +334,95 @@ a:hover {
 @media (max-width: 768px) {
   .nav {
     position: relative;
+    align-items: flex-start;
   }
 
-  .nav-links {
+  .nav-brand {
+    flex: 1;
+    padding-right: var(--space-sm);
+  }
+
+  .nav-primary {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 4px);
     left: 0;
     right: 0;
-    flex-direction: column;
-    padding: var(--space-md);
-    gap: 0;
+    flex: none;
+    width: 100%;
+    justify-content: stretch;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
     background: var(--color-cream);
-    border-bottom: 1px solid var(--color-cream-dark);
-    overflow: hidden;
+    border: 1px solid var(--color-cream-dark);
+    border-radius: var(--radius);
+    padding: var(--space-sm);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
     visibility: hidden;
     opacity: 0;
-    transform: translateY(-12px);
+    transform: translateY(-8px);
     pointer-events: none;
     transition:
-      visibility 0s linear 0.3s,
-      opacity 0.3s var(--ease-out-smooth),
-      transform 0.3s var(--ease-out-smooth),
-      border-color var(--nav-transition);
+      opacity 0.25s var(--ease-out-smooth),
+      visibility 0.25s,
+      transform 0.25s var(--ease-out-smooth);
   }
 
-  .nav-links.open {
+  .nav-primary.is-open {
     visibility: visible;
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
-    transition:
-      visibility 0s linear 0s,
-      opacity 0.3s var(--ease-out-smooth),
-      transform 0.35s var(--ease-out-smooth);
   }
 
-  .nav-links li {
-    opacity: 0;
-    transform: translateY(-6px);
-    transition:
-      opacity 0.25s var(--ease-out-smooth),
-      transform 0.25s var(--ease-out-smooth),
-      color var(--nav-transition);
+  .nav-list {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 0;
   }
 
-  .nav-links.open li {
+  .nav-item {
+    width: 100%;
+    border-bottom: 1px solid var(--color-cream-dark);
+  }
+
+  .nav-item:last-child {
+    border-bottom: none;
+  }
+
+  .nav-link {
+    padding: var(--space-sm) var(--space-xs);
+  }
+
+  .nav-dropdown-trigger {
+    width: 100%;
+    justify-content: space-between;
+    padding: var(--space-sm) var(--space-xs);
+    text-align: left;
+  }
+
+  .nav-dropdown-menu {
+    position: static;
+    display: none;
+    min-width: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0 0 var(--space-sm) var(--space-sm);
+    border: none;
+    box-shadow: none;
+    background: transparent;
     opacity: 1;
-    transform: translateY(0);
+    visibility: visible;
+    transform: none;
   }
 
-  .nav-links.open li:nth-child(1) { transition-delay: 0.05s; }
-  .nav-links.open li:nth-child(2) { transition-delay: 0.1s; }
-  .nav-links.open li:nth-child(3) { transition-delay: 0.15s; }
-  .nav-links.open li:nth-child(4) { transition-delay: 0.2s; }
-  .nav-links.open li:nth-child(5) { transition-delay: 0.25s; }
-
-  .nav-links a {
+  .nav-item--has-dropdown.nav-dropdown--open .nav-dropdown-menu {
     display: block;
-    padding: var(--space-sm) 0;
-    border-bottom: 1px solid transparent;
-    transition: color var(--nav-transition), border-color var(--nav-transition);
   }
 
-  .nav-links a:hover {
-    border-bottom-color: var(--color-cream-dark);
+  .nav-dropdown-link {
+    padding: 0.45rem 0.5rem;
+    font-size: 0.87rem;
   }
 
   .nav-toggle {
@@ -317,7 +489,13 @@ a:hover {
 .section.reveal .impact-quote,
 .section.reveal .support-card,
 .section.reveal .contact-form,
-.section.reveal .contact-info {
+.section.reveal .contact-info,
+.section.reveal .updates-actions,
+.section.reveal .section-body,
+.section.reveal .testimony-card,
+.section.reveal .romans-road,
+.section.reveal .prayer-teaser-date,
+.section.reveal .prayer-teaser-note {
   opacity: 0;
   transform: translateY(var(--reveal-offset));
   transition:
@@ -328,22 +506,35 @@ a:hover {
 /* Section scroll-reveal: visible state with stagger */
 .section.reveal.is-visible .section-label { transition-delay: 0s; opacity: 1; transform: translateY(0); }
 .section.reveal.is-visible .section-title { transition-delay: 0.08s; opacity: 1; transform: translateY(0); }
+.section.reveal.is-visible .prayer-teaser-date { transition-delay: 0.14s; opacity: 1; transform: translateY(0); }
 .section.reveal.is-visible .section-intro { transition-delay: 0.16s; opacity: 1; transform: translateY(0); }
+.prayer-letter-teaser.section.reveal.is-visible .section-intro { transition-delay: 0.22s; }
+.prayer-letter-teaser.section.reveal.is-visible .updates-actions { transition-delay: 0.3s; }
+.prayer-letter-teaser.section.reveal.is-visible .prayer-teaser-note { transition-delay: 0.38s; opacity: 1; transform: translateY(0); }
 .section.reveal.is-visible .mission-card:nth-child(1) { transition-delay: 0.24s; opacity: 1; transform: translateY(0); }
 .section.reveal.is-visible .mission-card:nth-child(2) { transition-delay: 0.32s; opacity: 1; transform: translateY(0); }
 .section.reveal.is-visible .mission-card:nth-child(3) { transition-delay: 0.4s; opacity: 1; transform: translateY(0); }
-.section.reveal.is-visible .impact-stat:nth-child(1) { transition-delay: 0.24s; opacity: 1; transform: translateY(0); }
-.section.reveal.is-visible .impact-stat:nth-child(2) { transition-delay: 0.32s; opacity: 1; transform: translateY(0); }
-.section.reveal.is-visible .impact-stat:nth-child(3) { transition-delay: 0.4s; opacity: 1; transform: translateY(0); }
-.section.reveal.is-visible .impact-quote { transition-delay: 0.48s; opacity: 1; transform: translateY(0); }
+.section.impact.reveal.is-visible .impact-stat:nth-child(1) { transition-delay: 0.48s; opacity: 1; transform: translateY(0); }
+.section.impact.reveal.is-visible .impact-stat:nth-child(2) { transition-delay: 0.56s; opacity: 1; transform: translateY(0); }
+.section.impact.reveal.is-visible .impact-stat:nth-child(3) { transition-delay: 0.64s; opacity: 1; transform: translateY(0); }
+.section.impact.reveal.is-visible .impact-quote { transition-delay: 0.72s; opacity: 1; transform: translateY(0); }
 .section.reveal.is-visible .support-card:nth-child(1) { transition-delay: 0.24s; opacity: 1; transform: translateY(0); }
 .section.reveal.is-visible .support-card:nth-child(2) { transition-delay: 0.32s; opacity: 1; transform: translateY(0); }
 .section.reveal.is-visible .support-card:nth-child(3) { transition-delay: 0.4s; opacity: 1; transform: translateY(0); }
+.home-quick-links.section.reveal.is-visible .support-card:nth-child(4) { transition-delay: 0.48s; opacity: 1; transform: translateY(0); }
+.home-quick-links.section.reveal.is-visible .support-card:nth-child(5) { transition-delay: 0.56s; opacity: 1; transform: translateY(0); }
 .section.reveal.is-visible .contact-form { transition-delay: 0.24s; opacity: 1; transform: translateY(0); }
 .section.reveal.is-visible .contact-info { transition-delay: 0.36s; opacity: 1; transform: translateY(0); }
+.section.reveal.is-visible .updates-actions { transition-delay: 0.24s; opacity: 1; transform: translateY(0); }
+.section.reveal.is-visible .section-body { transition-delay: 0.24s; opacity: 1; transform: translateY(0); }
+.section.reveal.is-visible .testimony-card:nth-child(1) { transition-delay: 0.24s; opacity: 1; transform: translateY(0); }
+.section.reveal.is-visible .testimony-card:nth-child(2) { transition-delay: 0.32s; opacity: 1; transform: translateY(0); }
+.section.reveal.is-visible .romans-road { transition-delay: 0.24s; opacity: 1; transform: translateY(0); }
+#gospel.section.reveal.is-visible .section-body { transition-delay: 0.36s; opacity: 1; transform: translateY(0); }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-tagline, .hero-title, .hero-desc, .hero-actions, .hero-scroll {
+  .hero-tagline, .hero-title, .hero-desc, .hero-actions, .hero-scroll,
+  .hero--photo .hero-kicker {
     animation: none;
     opacity: 1;
   }
@@ -355,7 +546,13 @@ a:hover {
   .section.reveal .impact-quote,
   .section.reveal .support-card,
   .section.reveal .contact-form,
-  .section.reveal .contact-info {
+  .section.reveal .contact-info,
+  .section.reveal .updates-actions,
+  .section.reveal .section-body,
+  .section.reveal .testimony-card,
+  .section.reveal .romans-road,
+  .section.reveal .prayer-teaser-date,
+  .section.reveal .prayer-teaser-note {
     opacity: 1;
     transform: none;
     transition: none;
@@ -368,7 +565,11 @@ a:hover {
   .section.reveal.is-visible .impact-quote,
   .section.reveal.is-visible .support-card,
   .section.reveal.is-visible .contact-form,
-  .section.reveal.is-visible .contact-info {
+  .section.reveal.is-visible .contact-info,
+  .section.reveal.is-visible .updates-actions,
+  .section.reveal.is-visible .section-body,
+  .section.reveal.is-visible .testimony-card,
+  .section.reveal.is-visible .romans-road {
     transition-delay: 0s;
   }
 }
@@ -403,6 +604,12 @@ a:hover {
   .impact-bg {
     will-change: auto;
   }
+}
+
+.hero-page .hero-bg {
+  background:
+    linear-gradient(165deg, rgba(248, 246, 241, 0.96) 0%, rgba(235, 231, 223, 0.92) 100%),
+    radial-gradient(ellipse 80% 50% at 50% 20%, rgba(184, 134, 11, 0.08) 0%, transparent 50%);
 }
 
 .hero-content {
@@ -453,6 +660,122 @@ a:hover {
   justify-content: center;
   opacity: 0;
   animation: revealUp 0.8s var(--reveal-ease) 0.55s forwards;
+}
+
+/* NEW: Home hero full-bleed family photo (index.html) */
+.hero--photo {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.hero--photo .hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero--photo .hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero--photo .hero-photo-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+
+.hero--photo .hero-content {
+  z-index: 2;
+}
+
+.hero--photo .hero-title {
+  color: #fff;
+  margin-bottom: var(--space-sm);
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+}
+
+.hero--photo .hero-kicker {
+  font-family: var(--font-body);
+  font-size: clamp(1.05rem, 2.4vw, 1.3rem);
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 var(--space-lg);
+  line-height: 1.45;
+  max-width: 36rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  animation: revealUp 0.8s var(--reveal-ease) 0.2s forwards;
+}
+
+.hero--photo .hero-actions {
+  animation-delay: 0.38s;
+}
+
+.hero--photo .hero-actions .btn-secondary {
+  border-color: rgba(255, 255, 255, 0.85);
+  color: #fff;
+}
+
+.hero--photo .hero-actions .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.hero--photo .hero-scroll {
+  color: rgba(255, 255, 255, 0.88);
+  z-index: 2;
+}
+
+.hero--photo .scroll-line {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.85), transparent);
+}
+
+.who-we-are-blurb .section-intro {
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.home-quick-links .support-card,
+.cta-pgg-wrap .support-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-quick-links .support-card .btn,
+.cta-pgg-wrap .support-card .btn {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+.prayer-letter-teaser .prayer-teaser-date {
+  display: block;
+  font-weight: 600;
+  color: var(--color-gold);
+  margin: 0 0 var(--space-md);
+  font-size: 0.95rem;
+}
+
+.prayer-letter-teaser .prayer-teaser-note {
+  margin: var(--space-md) 0 0;
+  font-size: 0.9rem;
+  color: var(--color-ink-soft);
+}
+
+.cta-pgg-wrap {
+  background: var(--color-white);
+  border: 1px solid var(--color-cream-dark);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  margin-top: var(--space-md);
 }
 
 /* Page hero (shorter, for inner pages) */
@@ -583,6 +906,13 @@ a:hover {
   font-size: 0.95rem;
 }
 
+#sermon-list .mission-card audio {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin-top: var(--space-md);
+}
+
 /* ===== Impact ===== */
 .impact {
   position: relative;
@@ -666,6 +996,73 @@ a:hover {
   .impact-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* ===== Content sections (testimonies, gospel) ===== */
+.content-band {
+  background: var(--color-cream-dark);
+}
+
+.title-sub {
+  font-family: var(--font-body);
+  font-size: 0.45em;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+.testimony-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.testimony-card blockquote {
+  margin: 0;
+  padding: var(--space-lg);
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  border-left: 4px solid var(--color-gold-light);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.testimony-card blockquote p {
+  margin: 0;
+  font-style: italic;
+  color: var(--color-ink-soft);
+  line-height: 1.65;
+}
+
+.romans-road {
+  list-style: none;
+  margin: var(--space-md) 0;
+  padding: 0;
+  counter-reset: road;
+}
+
+.romans-road li {
+  margin: 0 0 var(--space-sm);
+  padding: var(--space-md) var(--space-md) var(--space-md) var(--space-lg);
+  background: var(--color-white);
+  border-radius: var(--radius);
+  border-left: 4px solid var(--color-teal);
+  color: var(--color-ink-soft);
+  line-height: 1.55;
+}
+
+.romans-road li strong {
+  color: var(--color-ink);
+}
+
+.beliefs-list p {
+  margin: 0;
+}
+
+/* ===== Updates ===== */
+.updates {
+  background: var(--color-cream-dark);
 }
 
 /* ===== Support ===== */
@@ -812,9 +1209,87 @@ a:hover {
 }
 
 .footer-content {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
+  text-align: left;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: minmax(0, 220px) 1fr;
+  gap: var(--space-xl);
+  align-items: start;
+  margin-bottom: var(--space-lg);
+}
+
+@media (max-width: 900px) {
+  .footer-top {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .footer-brand-block {
+    margin: 0 auto;
+  }
+
+  .footer-nav-columns {
+    justify-content: center;
+  }
+}
+
+.footer-brand-block {
+  text-align: left;
+}
+
+.footer-brand-block .logo-tagline {
+  color: rgba(248, 246, 241, 0.85);
+  margin-top: 0.35rem;
+  max-width: none;
+}
+
+.footer-nav-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-lg) var(--space-xl);
+  justify-content: flex-end;
+}
+
+.footer-col {
+  min-width: 8.5rem;
+}
+
+.footer-col-title {
+  margin: 0 0 var(--space-xs);
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-gold-light);
+}
+
+.footer-col-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-col-list li {
+  margin-bottom: 0.35rem;
+}
+
+.footer-col-list a {
+  font-size: 0.88rem;
+  color: rgba(248, 246, 241, 0.85);
+  transition: color var(--transition);
+}
+
+.footer-col-list a:hover {
+  color: var(--color-gold-light);
+}
+
+.footer-bottom {
   text-align: center;
+  padding-top: var(--space-md);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .footer-tagline {
@@ -831,6 +1306,18 @@ a:hover {
   display: flex;
   justify-content: center;
   gap: var(--space-lg);
+}
+
+.footer-links-grid {
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-md);
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer-links-grid a {
+  font-size: 0.9rem;
 }
 
 .footer-links a {
@@ -850,6 +1337,49 @@ a:hover {
 .footer-admin {
   margin-left: 0.5em;
   opacity: 0.8;
+}
+
+/* ===== Ministry accordions (Myanmar / Thailand pages) ===== */
+.ministry-accordions {
+  max-width: 720px;
+  margin: var(--space-lg) auto 0;
+}
+
+.ministry-accordions details {
+  margin-bottom: var(--space-sm);
+  border: 1px solid var(--color-cream-dark);
+  border-radius: var(--radius);
+  background: var(--color-white);
+  overflow: hidden;
+}
+
+.ministry-accordions summary {
+  padding: var(--space-md);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--color-ink);
+  cursor: pointer;
+  list-style: none;
+}
+
+.ministry-accordions summary::-webkit-details-marker {
+  display: none;
+}
+
+.ministry-accordions details[open] summary {
+  border-bottom: 1px solid var(--color-cream-dark);
+}
+
+.ministry-accordions .ministry-panel-body {
+  padding: var(--space-md);
+  color: var(--color-ink-soft);
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.ministry-accordions .ministry-panel-body p {
+  margin: 0 0 var(--space-sm);
 }
 
 /* ===== Podcasts page ===== */
@@ -986,6 +1516,19 @@ a:hover {
 }
 
 /* ===== Login page ===== */
+.login-page .nav {
+  align-items: flex-start;
+}
+
+.login-page .nav > nav {
+  margin-left: auto;
+  align-self: center;
+}
+
+.admin-page .nav-list {
+  flex-wrap: nowrap;
+}
+
 .login-page .login-main {
   min-height: 100vh;
   padding: calc(80px + var(--space-2xl)) var(--space-lg) var(--space-2xl);

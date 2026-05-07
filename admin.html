@@ -8,25 +8,42 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .admin-sermon-panel {
+      max-width: 36rem;
+      margin: 0 auto;
+    }
+    .admin-sermon-msg {
+      margin-top: var(--space-md, 1rem);
+      min-height: 1.35em;
+      font-size: 0.95rem;
+    }
+    .admin-sermon-msg--success {
+      color: var(--color-teal);
+    }
+    .admin-sermon-msg--error {
+      color: #b42318;
+    }
+  </style>
 </head>
 <body class="admin-page">
   <script src="auth.js"></script>
   <script>if (window.auth) { window.auth.requireAuth(); }</script>
 
   <header class="site-header admin-header">
-    <nav class="nav">
-      <a href="index.html" class="logo">Reach the Nations</a>
-      <ul class="nav-links">
-        <li><a href="index.html">Back to site</a></li>
-        <li><a href="podcasts.html">Podcasts</a></li>
-        <li><a href="#" id="admin-logout" class="nav-logout">Log out</a></li>
-      </ul>
-      <button class="nav-toggle" aria-label="Open menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </nav>
+    <div class="nav">
+      <div class="nav-brand">
+        <a href="index.html" class="logo">Reach the Nations</a>
+        <p class="logo-tagline">Reaching Burmese people for Christ</p>
+      </div>
+      <nav aria-label="Admin navigation">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html" class="nav-link">Back to site</a></li>
+          <li class="nav-item"><a href="podcasts.html" class="nav-link">Podcasts</a></li>
+          <li class="nav-item"><a href="#" id="admin-logout" class="nav-link nav-logout">Log out</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <main class="admin-main">
@@ -37,12 +54,38 @@
         <p class="admin-desc">Ministry admin for Reach the Nations — Thailand.</p>
       </section>
 
+      <section class="admin-podcasts" aria-labelledby="admin-sermons-heading">
+        <h2 id="admin-sermons-heading" class="admin-section-title">Sermons (Firestore)</h2>
+        <p class="admin-section-desc">Add sermons to your <code>sermons</code> collection. They appear on <a href="sermon-audios.html">Sermon Audios</a>. Ensure Firestore security rules allow writes from this app (e.g. authenticated admin).</p>
+
+        <div class="admin-card admin-card-wide admin-sermon-panel">
+          <h3 class="admin-card-title">Add sermon</h3>
+          <form id="admin-sermon-form" class="admin-podcast-form">
+            <div class="admin-form-row">
+              <label for="sermon-title">Title</label>
+              <input type="text" id="sermon-title" name="title" required autocomplete="off" placeholder="Sermon title">
+            </div>
+            <div class="admin-form-row">
+              <label for="sermon-description">Description</label>
+              <textarea id="sermon-description" name="description" rows="4" placeholder="Short description"></textarea>
+            </div>
+            <div class="admin-form-row">
+              <label for="sermon-audio-url">Audio URL</label>
+              <input type="url" id="sermon-audio-url" name="audioURL" placeholder="https://… direct link to .mp3">
+            </div>
+            <button type="submit" class="btn btn-primary">Save sermon</button>
+          </form>
+          <p id="admin-sermon-msg" class="admin-sermon-msg" role="status" aria-live="polite"></p>
+        </div>
+      </section>
+
       <section class="admin-cards">
         <div class="admin-card">
           <h2 class="admin-card-title">Quick links</h2>
           <ul class="admin-links">
             <li><a href="index.html">View public site</a></li>
-            <li><a href="index.html#contact">Contact / support info</a></li>
+            <li><a href="sermon-audios.html">Sermon Audios</a></li>
+            <li><a href="contact-information.html">Contact / support info</a></li>
             <li><a href="podcasts.html">Podcasts page</a></li>
           </ul>
         </div>
@@ -199,6 +242,63 @@
       }
       renderAdminList();
     })();
+  </script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBrVues6zf4UGzhGat4vLbFXhWp3pq0zT8",
+      authDomain: "judson-website.firebaseapp.com",
+      projectId: "judson-website",
+      storageBucket: "judson-website.firebasestorage.app",
+      messagingSenderId: "17730863016",
+      appId: "1:17730863016:web:167ce8dafa1a4dee84679d",
+      measurementId: "G-6QTJNNKM1C"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const sermonForm = document.getElementById("admin-sermon-form");
+    const msgEl = document.getElementById("admin-sermon-msg");
+
+    function setMsg(text, kind) {
+      if (!msgEl) return;
+      msgEl.textContent = text || "";
+      msgEl.className = "admin-sermon-msg" + (kind ? " admin-sermon-msg--" + kind : "");
+    }
+
+    if (sermonForm) {
+      sermonForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        setMsg("Saving…");
+
+        const title = document.getElementById("sermon-title").value.trim();
+        const description = document.getElementById("sermon-description").value.trim();
+        const audioURL = document.getElementById("sermon-audio-url").value.trim();
+
+        if (!title) {
+          setMsg("Please enter a title.", "error");
+          return;
+        }
+
+        try {
+          await addDoc(collection(db, "sermons"), {
+            title,
+            description,
+            audioURL,
+            createdAt: serverTimestamp()
+          });
+          setMsg("Sermon saved successfully.", "success");
+          sermonForm.reset();
+        } catch (err) {
+          console.error("addDoc sermons:", err);
+          setMsg(err.message || "Could not save. Check Firestore rules and try again.", "error");
+        }
+      });
+    }
   </script>
 </body>
 </html>

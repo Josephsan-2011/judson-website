@@ -12,33 +12,79 @@
 </head>
 <body>
   <header class="site-header">
-    <nav class="nav">
-      <a href="index.html" class="logo">Reach the Nations</a>
-      <ul class="nav-links">
-        <li><a href="#mission">Mission</a></li>
-        <li><a href="#impact">Impact</a></li>
-        <li><a href="#support">Support</a></li>
-        <li><a href="podcasts.html">Podcasts</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <button class="nav-toggle" aria-label="Open menu">
+    <div class="nav">
+      <div class="nav-brand">
+        <a href="index.html" class="logo">Reach the Nations</a>
+        <p class="logo-tagline">Reaching Burmese people for Christ</p>
+      </div>
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-primary">
         <span></span>
         <span></span>
         <span></span>
       </button>
-    </nav>
+      <nav id="nav-primary" class="nav-primary" aria-label="Primary navigation">
+        <ul class="nav-list" role="menubar">
+          <li class="nav-item" role="none">
+            <a href="index.html" class="nav-link nav-current" role="menuitem">Home</a>
+          </li>
+          <li class="nav-item nav-item--has-dropdown" role="none">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="dropdown-about">About the Judsons<span class="nav-caret" aria-hidden="true"></span></button>
+            <ul id="dropdown-about" class="nav-dropdown-menu" role="menu">
+              <li role="none"><a href="judson-family.html" class="nav-dropdown-link" role="menuitem">The Judson Family</a></li>
+              <li role="none"><a href="testimonies.html" class="nav-dropdown-link" role="menuitem">Testimonies</a></li>
+              <li role="none"><a href="our-beliefs.html" class="nav-dropdown-link" role="menuitem">Our Beliefs</a></li>
+              <li role="none"><a href="romans-road-gospel.html" class="nav-dropdown-link" role="menuitem">Romans Road Gospel</a></li>
+            </ul>
+          </li>
+          <li class="nav-item nav-item--has-dropdown" role="none">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="dropdown-ministries">Ministries<span class="nav-caret" aria-hidden="true"></span></button>
+            <ul id="dropdown-ministries" class="nav-dropdown-menu" role="menu">
+              <li role="none"><a href="ministries-myanmar.html" class="nav-dropdown-link" role="menuitem">Myanmar</a></li>
+              <li role="none"><a href="ministries-thailand.html" class="nav-dropdown-link" role="menuitem">Thailand</a></li>
+            </ul>
+          </li>
+          <li class="nav-item nav-item--has-dropdown" role="none">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="dropdown-resources">Resources<span class="nav-caret" aria-hidden="true"></span></button>
+            <ul id="dropdown-resources" class="nav-dropdown-menu" role="menu">
+              <li role="none"><a href="radio-programs.html" class="nav-dropdown-link" role="menuitem">Radio Programs</a></li>
+              <li role="none"><a href="gospel-tracts.html" class="nav-dropdown-link" role="menuitem">Gospel Tracts</a></li>
+              <li role="none"><a href="translated-hymns.html" class="nav-dropdown-link" role="menuitem">Translated Hymns</a></li>
+              <li role="none"><a href="sermon-audios.html" class="nav-dropdown-link" role="menuitem">Sermon Audios</a></li>
+            </ul>
+          </li>
+          <li class="nav-item nav-item--has-dropdown" role="none">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="dropdown-prayer-updates">Prayer &amp; Updates<span class="nav-caret" aria-hidden="true"></span></button>
+            <ul id="dropdown-prayer-updates" class="nav-dropdown-menu" role="menu">
+              <li role="none"><a href="prayer-letters.html" class="nav-dropdown-link" role="menuitem">Prayer Letters</a></li>
+              <li role="none"><a href="presentation-slideshows.html" class="nav-dropdown-link" role="menuitem">Presentation Slideshows</a></li>
+            </ul>
+          </li>
+          <li class="nav-item nav-item--has-dropdown" role="none">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="dropdown-contact-nav">Contact<span class="nav-caret" aria-hidden="true"></span></button>
+            <ul id="dropdown-contact-nav" class="nav-dropdown-menu" role="menu">
+              <li role="none"><a href="contact-information.html" class="nav-dropdown-link" role="menuitem">Contact Information</a></li>
+              <li role="none"><a href="mission-board.html" class="nav-dropdown-link" role="menuitem">Our Mission Board</a></li>
+              <li role="none"><a href="home-church.html" class="nav-dropdown-link" role="menuitem">Home Church</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <section class="hero">
-      <div class="hero-bg" aria-hidden="true"></div>
+    <!-- NEW: Hero — full-bleed Judson family photo + overlay -->
+    <section id="home" class="hero hero--photo">
+      <div class="hero-media">
+        <img src="judsonfamily.jpeg" alt="The Judson Family" loading="eager" width="1920" height="1080">
+      </div>
+      <div class="hero-photo-overlay" aria-hidden="true"></div>
       <div class="hero-content">
-        <p class="hero-tagline">Serving. Going. Sending.</p>
-        <h1 class="hero-title">Bringing hope to&nbsp;Thailand</h1>
-        <p class="hero-desc">We serve in Thailand alongside local churches—sharing the Gospel, making disciples, and loving the Thai people. Your partnership makes this ministry possible.</p>
+        <h1 class="hero-title">The Judson Family</h1>
+        <p class="hero-kicker">Reaching Burmese people for Christ</p>
         <div class="hero-actions">
-          <a href="#support" class="btn btn-primary">Partner with us</a>
-          <a href="#mission" class="btn btn-secondary">Our mission</a>
+          <a href="#resources" class="btn btn-primary">Partner with us</a>
+          <a href="judson-family.html" class="btn btn-secondary">Meet the family</a>
         </div>
       </div>
       <div class="hero-scroll">
@@ -47,10 +93,128 @@
       </div>
     </section>
 
-    <section id="mission" class="section mission reveal">
+    <!-- NEW: Who We Are blurb -->
+    <section id="who-we-are" class="section mission who-we-are-blurb reveal">
       <div class="container">
-        <span class="section-label">Our calling</span>
-        <h2 class="section-title">We go so Thailand may know</h2>
+        <span class="section-label">Our family</span>
+        <h2 class="section-title">Who We Are</h2>
+        <p class="section-intro">We are the Judson Family, called by God to reach the Burmese people with the Gospel of Jesus Christ. Through evangelism, church planting, and discipleship in Myanmar and Thailand, we are seeing lives transformed by the power of the Word. Your prayers and support make this ministry possible.</p>
+      </div>
+    </section>
+
+    <!-- NEW: Quick links to main navbar areas -->
+    <section id="home-quick-links" class="section support home-quick-links reveal">
+      <div class="container">
+        <span class="section-label">Explore</span>
+        <h2 class="section-title">Across this site</h2>
+        <p class="section-intro">Shortcuts to the main areas of our ministry online.</p>
+        <ul class="support-options">
+          <li class="support-card">
+            <h3>About the Judsons</h3>
+            <p>Meet our family, our story, and what God has called us to do.</p>
+            <a href="judson-family.html" class="btn btn-secondary">Learn More</a>
+          </li>
+          <li class="support-card">
+            <h3>Ministries</h3>
+            <p>See how we serve in Myanmar and Thailand through the local church.</p>
+            <a href="#ministries" class="btn btn-secondary">Learn More</a>
+          </li>
+          <li class="support-card">
+            <h3>Resources</h3>
+            <p>Radio, tracts, hymns, and audio to help you grow and share the Gospel.</p>
+            <a href="#resources" class="btn btn-secondary">Learn More</a>
+          </li>
+          <li class="support-card">
+            <h3>Prayer &amp; Updates</h3>
+            <p>Read prayer letters and stay current with news from the field.</p>
+            <a href="prayer-letters.html" class="btn btn-secondary">Learn More</a>
+          </li>
+          <li class="support-card">
+            <h3>Contact</h3>
+            <p>Reach out for giving information, trips, or to connect with our team.</p>
+            <a href="contact-information.html" class="btn btn-secondary">Learn More</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- NEW: Latest prayer letter teaser -->
+    <section id="latest-letter-home" class="section prayer-letter-teaser updates reveal">
+      <div class="container">
+        <span class="section-label">Stay connected</span>
+        <h2 class="section-title">Latest Prayer Letter</h2>
+        <span class="prayer-teaser-date">April 2026</span>
+        <p class="section-intro">Praise the Lord for 12 new believers in the new church plant in Yangon! Please pray for the upcoming outreach in rural Myanmar…</p>
+        <p class="updates-actions">
+          <a href="prayer-letters.html" class="btn btn-primary">Read Full Letter</a>
+        </p>
+        <p class="prayer-teaser-note">New letters added monthly — sign up to receive them by email!</p>
+      </div>
+    </section>
+
+    <section id="judsons" class="section mission reveal">
+      <div class="container">
+        <span class="section-label">Who we are</span>
+        <h2 class="section-title">The Judson Family</h2>
+        <p class="section-intro">We are missionaries to Thailand, committed to Christ, to one another, and to the Thai people. Add your family story, photos, and heart for ministry here.</p>
+        <div class="section-body">
+          <p>Introduce the Judsons—background, calling to Thailand, and how supporters can pray. This section is ready for your own words and images.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonies" class="section content-band reveal">
+      <div class="container">
+        <span class="section-label">Stories of grace</span>
+        <h2 class="section-title">Testimonies</h2>
+        <p class="section-intro">God at work in Thailand and in the lives of those we serve.</p>
+        <ul class="testimony-list">
+          <li class="testimony-card">
+            <blockquote>
+              <p>“Placeholder: Share a testimony of God’s faithfulness in your ministry or in someone’s life.”</p>
+            </blockquote>
+          </li>
+          <li class="testimony-card">
+            <blockquote>
+              <p>“Placeholder: Another story of answered prayer or new faith.”</p>
+            </blockquote>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="beliefs" class="section mission reveal">
+      <div class="container">
+        <span class="section-label">Faith &amp; practice</span>
+        <h2 class="section-title">Our Beliefs</h2>
+        <p class="section-intro">We hold to the historic Christian faith as revealed in Scripture.</p>
+        <div class="section-body beliefs-list">
+          <p>Placeholder: Summarize your statement of faith—Trinity, Scripture, salvation by grace through faith in Christ alone, the Church, and Great Commission. Link to a full doctrinal statement if you have one.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="gospel" class="section content-band reveal">
+      <div class="container">
+        <span class="section-label">Good news</span>
+        <h2 class="section-title">The Gospel <span class="title-sub">(Romans Road)</span></h2>
+        <p class="section-intro">The path from sin to eternal life through Jesus Christ, as shown in the book of Romans.</p>
+        <ol class="romans-road">
+          <li><strong>Romans 3:23</strong> — All have sinned and fall short of God’s glory.</li>
+          <li><strong>Romans 6:23</strong> — The wages of sin is death; God’s gift is eternal life in Christ.</li>
+          <li><strong>Romans 5:8</strong> — God demonstrates His love: Christ died for us while we were still sinners.</li>
+          <li><strong>Romans 10:9–10</strong> — Confess Jesus as Lord, believe God raised Him from the dead, and you will be saved.</li>
+          <li><strong>Romans 10:13</strong> — Everyone who calls on the name of the Lord will be saved.</li>
+        </ol>
+        <p class="section-body"><a href="contact-information.html" class="link-arrow">Questions? We’d love to talk with you</a></p>
+      </div>
+    </section>
+
+    <section id="ministries" class="section impact reveal">
+      <div class="impact-bg" aria-hidden="true"></div>
+      <div class="container">
+        <span class="section-label">What we do</span>
+        <h2 class="section-title">Ministries</h2>
         <p class="section-intro">Our mission in Thailand is to share the Gospel, disciple believers, and partner with local churches—training leaders and meeting practical needs in Thai communities.</p>
         <ul class="mission-cards">
           <li class="mission-card">
@@ -69,14 +233,6 @@
             <p>We work alongside Thai churches and believers, not in place of them—building up the body of Christ in Thailand.</p>
           </li>
         </ul>
-      </div>
-    </section>
-
-    <section id="impact" class="section impact reveal">
-      <div class="impact-bg" aria-hidden="true"></div>
-      <div class="container">
-        <span class="section-label">Impact</span>
-        <h2 class="section-title">Lives changed together</h2>
         <div class="impact-grid">
           <div class="impact-stat">
             <span class="impact-number">—</span>
@@ -98,28 +254,43 @@
       </div>
     </section>
 
-    <section id="support" class="section support reveal">
+    <section id="resources" class="section support reveal">
       <div class="container">
         <span class="section-label">Get involved</span>
-        <h2 class="section-title">How you can help</h2>
+        <h2 class="section-title">Resources</h2>
         <p class="section-intro">Whether you give, pray, or go—your role matters. Choose a way to partner with our ministry in Thailand.</p>
         <ul class="support-options">
           <li class="support-card">
             <h3>Give</h3>
             <p>One-time or monthly giving helps fund our ministry in Thailand—language study, outreach, and partnership with local churches.</p>
-            <a href="#contact" class="link-arrow">Give now</a>
+            <a href="contact-information.html" class="link-arrow">Give now</a>
           </li>
           <li class="support-card">
             <h3>Pray</h3>
             <p>Join our prayer network and receive updates and specific requests from Thailand.</p>
-            <a href="#contact" class="link-arrow">Join prayer team</a>
+            <a href="contact-information.html" class="link-arrow">Join prayer team</a>
           </li>
           <li class="support-card">
             <h3>Go</h3>
             <p>Explore short-term trip opportunities to Thailand or learn about long-term service alongside our team.</p>
-            <a href="#contact" class="link-arrow">Explore opportunities</a>
+            <a href="contact-information.html" class="link-arrow">Explore opportunities</a>
           </li>
         </ul>
+      </div>
+    </section>
+
+    <section id="prayer-letters" class="section updates reveal">
+      <div class="container">
+        <span class="section-label">Stay connected</span>
+        <h2 class="section-title">Prayer Letters &amp; Presentations</h2>
+        <p class="section-intro">Read our latest prayer letters, watch presentation videos, and follow ministry news from Thailand.</p>
+        <p class="updates-actions">
+          <a href="prayer-letters.html" class="link-arrow">Prayer letters</a>
+          <span class="updates-actions-sep" aria-hidden="true"> · </span>
+          <a href="presentation-slideshows.html" class="link-arrow">Presentation slideshows</a>
+          <span class="updates-actions-sep" aria-hidden="true"> · </span>
+          <a href="podcasts.html" class="link-arrow">Podcasts</a>
+        </p>
       </div>
     </section>
 
@@ -154,20 +325,90 @@
         </div>
       </div>
     </section>
+
+    <!-- NEW: Pray / Give / Go call-to-action (before footer) -->
+    <section id="pray-give-go" class="section mission reveal">
+      <div class="container">
+        <div class="cta-pgg-wrap">
+          <ul class="support-options">
+            <li class="support-card">
+              <h3>Pray</h3>
+              <p>Join us in prayer for the Burmese people and our ministry.</p>
+              <a href="contact-information.html" class="btn btn-secondary">Join us in prayer</a>
+            </li>
+            <li class="support-card">
+              <h3>Give</h3>
+              <p>Support the work financially — every gift goes directly to the field.</p>
+              <a href="contact-information.html" class="btn btn-primary">Donate</a>
+            </li>
+            <li class="support-card">
+              <h3>Go</h3>
+              <p>Interested in joining us on the mission field? Learn how you can serve.</p>
+              <a href="contact-information.html" class="btn btn-secondary">Learn how to serve</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container">
-      <div class="footer-content">
-        <a href="index.html" class="logo">Reach the Nations</a>
-        <p class="footer-tagline">Serving. Going. Sending.</p>
-        <ul class="footer-links">
-          <li><a href="#mission">Mission</a></li>
-          <li><a href="#impact">Impact</a></li>
-          <li><a href="#support">Support</a></li>
-          <li><a href="podcasts.html">Podcasts</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
+    <div class="container footer-content">
+      <div class="footer-top">
+        <div class="footer-brand-block">
+          <a href="index.html" class="logo">Reach the Nations</a>
+          <p class="logo-tagline">Reaching Burmese people for Christ</p>
+        </div>
+        <nav class="footer-nav-columns" aria-label="Footer">
+          <div class="footer-col">
+            <p class="footer-col-title">Home</p>
+            <ul class="footer-col-list">
+              <li><a href="index.html">Home</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <p class="footer-col-title">About the Judsons</p>
+            <ul class="footer-col-list">
+              <li><a href="judson-family.html">The Judson Family</a></li>
+              <li><a href="testimonies.html">Testimonies</a></li>
+              <li><a href="our-beliefs.html">Our Beliefs</a></li>
+              <li><a href="romans-road-gospel.html">Romans Road Gospel</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <p class="footer-col-title">Ministries</p>
+            <ul class="footer-col-list">
+              <li><a href="ministries-myanmar.html">Myanmar</a></li>
+              <li><a href="ministries-thailand.html">Thailand</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <p class="footer-col-title">Resources</p>
+            <ul class="footer-col-list">
+              <li><a href="radio-programs.html">Radio Programs</a></li>
+              <li><a href="gospel-tracts.html">Gospel Tracts</a></li>
+              <li><a href="translated-hymns.html">Translated Hymns</a></li>
+              <li><a href="sermon-audios.html">Sermon Audios</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <p class="footer-col-title">Prayer &amp; Updates</p>
+            <ul class="footer-col-list">
+              <li><a href="prayer-letters.html">Prayer Letters</a></li>
+              <li><a href="presentation-slideshows.html">Presentation Slideshows</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <p class="footer-col-title">Contact</p>
+            <ul class="footer-col-list">
+              <li><a href="contact-information.html">Contact Information</a></li>
+              <li><a href="mission-board.html">Our Mission Board</a></li>
+              <li><a href="home-church.html">Home Church</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div class="footer-bottom">
         <p class="footer-copy">&copy; 2025 Reach the Nations. All rights reserved. <a href="login.html" class="footer-admin">Admin</a></p>
       </div>
     </div>

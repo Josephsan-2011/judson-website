@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Information | Reach the Nations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav">
+      <div class="nav-brand">
+        <a href="index.html" class="logo">Reach the Nations</a>
+        <p class="logo-tagline">Reaching Burmese people for Christ</p>
+      </div>
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-primary">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="nav-primary" class="nav-primary" aria-label="Primary navigation">
+        <ul class="nav-list" role="menubar">
+          <li class="nav-item" role="none">
+            <a href="index.html" class="nav-link" role="menuitem">Home</a>
+          </li>
+          <li class="nav-item nav-item--has-dropdown" role="none">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="dropdown-about">About the Judsons<span class="nav-caret" aria-hidden="true"></span></button>
+            <ul id="dropdown-about" class="nav-dropdown-menu" role="menu">
+              <li role="none"><a href="judson-family.html" class="nav-dropdown-link" role="menuitem">The Judson Family</a></li>
+              <li role="none"><a href="testimonies.html" class="nav-dropdown-link" role="menuitem">Testimonies</a></li>
+              <li role="none"><a href="our-beliefs.html" class="nav-dropdown-link" role="menuitem">Our Beliefs</a></li>
+              <li role="none"><a href="romans-road-gospel.html" class="nav-dropdown-link" role="menuitem">Romans Road Gospel</a></li>
+            </ul>
+          </li>
+          <li class="nav-item nav-item--has-dropdown" role="none">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="dropdown-ministries">Ministries<span class="nav-caret" aria-hidden="true"></span></button>
+            <ul id="dropdown-ministries" class="nav-dropdown-menu" role="menu">
+              <li role="none"><a href="ministries-myanmar.html" class="nav-dropdown-link" role="menuitem">Myanmar</a></li>
+              <li role="none"><a href="ministries-thailand.html" class="nav-dropdown-link" role="menuitem">Thailand</a></li>
+            </ul>
+          </li>
+          <li class="nav-item nav-item--has-dropdown" role="none">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="dropdown-resources">Resources<span class="nav-caret" aria-hidden="true"></span></button>
+            <ul id="dropdown-resources" class="nav-dropdown-menu" role="menu">
+              <li role="none"><a href="radio-programs.html" class="nav-dropdown-link" role="menuitem">Radio Programs</a></li>
+              <li role="none"><a href="gospel-tracts.html" class="nav-dropdown-link" role="menuitem">Gospel Tracts</a></li>
+              <li role="none"><a href="translated-hymns.html" class="nav-dropdown-link" role="menuitem">Translated Hymns</a></li>
+              <li role="none"><a href="sermon-audios.html" class="nav-dropdown-link" role="menuitem">Sermon Audios</a></li>
+            </ul>
+          </li>
+          <li class="nav-item nav-item--has-dropdown" role="none">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="dropdown-prayer-updates">Prayer &amp; Updates<span class="nav-caret" aria-hidden="true"></span></button>
+            <ul id="dropdown-prayer-updates" class="nav-dropdown-menu" role="menu">
+              <li role="none"><a href="prayer-letters.html" class="nav-dropdown-link" role="menuitem">Prayer Letters</a></li>
+              <li role="none"><a href="presentation-slideshows.html" class="nav-dropdown-link" role="menuitem">Presentation Slideshows</a></li>
+            </ul>
+          </li>
+          <li class="nav-item nav-item--has-dropdown" role="none">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="dropdown-contact-nav">Contact<span class="nav-caret" aria-hidden="true"></span></button>
+            <ul id="dropdown-contact-nav" class="nav-dropdown-menu" role="menu">
+              <li role="none"><a href="contact-information.html" class="nav-dropdown-link" role="menuitem">Contact Information</a></li>
+              <li role="none"><a href="mission-board.html" class="nav-dropdown-link" role="menuitem">Our Mission Board</a></li>
+              <li role="none"><a href="home-church.html" class="nav-dropdown-link" role="menuitem">Home Church</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero hero-page"><div class="hero-bg" aria-hidden="true"></div><div class="hero-content"><h1 class="hero-title">Contact Information</h1><p class="hero-desc">We would love to hear from you.</p></div></section>
+    <section class="section contact">
+      <div class="container">
+        <div class="contact-box">
+          <form class="contact-form" action="#" method="post">
+            <div class="form-row">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required placeholder="Your name">
+            </div>
+            <div class="form-row">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required placeholder="you@example.com">
+            </div>
+            <div class="form-row">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="4" required placeholder="How can we help?"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send message</button>
+          </form>
+          <div class="contact-info">
+            <p><strong>Reach the Nations</strong></p>
+            <p>Ministry in Thailand / Myanmar</p>
+            <p>P.O. Box 1234</p>
+            <p>Your City, ST 12345</p>
+            <p><a href="mailto:info@reachthenations.org">info@reachthenations.org</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-top">
+        <div class="footer-brand-block">
+          <a href="index.html" class="logo">Reach the Nations</a>
+          <p class="logo-tagline">Reaching Burmese people for Christ</p>
+        </div>
+        <nav class="footer-nav-columns" aria-label="Footer">
+          <div class="footer-col">
+            <p class="footer-col-title">Home</p>
+            <ul class="footer-col-list">
+              <li><a href="index.html">Home</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <p class="footer-col-title">About the Judsons</p>
+            <ul class="footer-col-list">
+              <li><a href="judson-family.html">The Judson Family</a></li>
+              <li><a href="testimonies.html">Testimonies</a></li>
+              <li><a href="our-beliefs.html">Our Beliefs</a></li>
+              <li><a href="romans-road-gospel.html">Romans Road Gospel</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <p class="footer-col-title">Ministries</p>
+            <ul class="footer-col-list">
+              <li><a href="ministries-myanmar.html">Myanmar</a></li>
+              <li><a href="ministries-thailand.html">Thailand</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <p class="footer-col-title">Resources</p>
+            <ul class="footer-col-list">
+              <li><a href="radio-programs.html">Radio Programs</a></li>
+              <li><a href="gospel-tracts.html">Gospel Tracts</a></li>
+              <li><a href="translated-hymns.html">Translated Hymns</a></li>
+              <li><a href="sermon-audios.html">Sermon Audios</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <p class="footer-col-title">Prayer &amp; Updates</p>
+            <ul class="footer-col-list">
+              <li><a href="prayer-letters.html">Prayer Letters</a></li>
+              <li><a href="presentation-slideshows.html">Presentation Slideshows</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <p class="footer-col-title">Contact</p>
+            <ul class="footer-col-list">
+              <li><a href="contact-information.html">Contact Information</a></li>
+              <li><a href="mission-board.html">Our Mission Board</a></li>
+              <li><a href="home-church.html">Home Church</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2025 Reach the Nations. All rights reserved. <a href="login.html" class="footer-admin">Admin</a></p>
+      </div>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
